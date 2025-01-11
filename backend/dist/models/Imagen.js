@@ -1,7 +1,5 @@
-"use strict";
-
-var mongoose = require("mongoose");
-var imageSchema = new mongoose.Schema({
+const mongoose = require("mongoose");
+const imageSchema = new mongoose.Schema({
   refueling: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Tanqueo",
@@ -17,5 +15,5 @@ var imageSchema = new mongoose.Schema({
     required: true
   }
 });
-var Imagen = mongoose.model("Imagen", imageSchema);
+const Imagen = mongoose.model("Imagen", imageSchema);
 module.exports = Imagen;

@@ -1,14 +1,7 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.TokenValidation = void 0;
-var _dotenv = _interopRequireDefault(require("dotenv"));
-var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
-_dotenv["default"].config();
-var SECK = process.env.SKEY_TOKEN;
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+dotenv.config();
+const SECK = process.env.SKEY_TOKEN;
 
 /**
  * La función TokenValidation busca un token de autenticación válido en las cookies de solicitud y lo
@@ -27,12 +20,14 @@ var SECK = process.env.SKEY_TOKEN;
  * después de que la validación del token sea exitosa, lo que permite que la solicitud
  * @returns La función `TokenValidation` devuelve diferentes respuestas HTTP según ciertas condiciones:
  */
-var TokenValidation = exports.TokenValidation = function TokenValidation(req, res, next) {
-  var authToken = req.cookies['auth-token'];
+export const TokenValidation = (req, res, next) => {
+  const {
+    'auth-token': authToken
+  } = req.cookies;
   if (!authToken) return res.status(401).json({
     message: 'Autorización denegada...!'
   });
-  _jsonwebtoken["default"].verify(authToken, SECK, function (err, user) {
+  jwt.verify(authToken, SECK, (err, user) => {
     if (err) return res.status(403).json({
       message: 'Token inválido...'
     });

@@ -1,7 +1,5 @@
-"use strict";
-
-var mongoose = require('mongoose');
-var imageVolquetaSchema = new mongoose.Schema({
+const mongoose = require('mongoose');
+const imageVolquetaSchema = new mongoose.Schema({
   volqueta: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Volqueta',
@@ -16,5 +14,5 @@ var imageVolquetaSchema = new mongoose.Schema({
     required: true
   }
 });
-var VolquetaImage = mongoose.model('VolquetaImage', imageVolquetaSchema);
+const VolquetaImage = mongoose.model('VolquetaImage', imageVolquetaSchema);
 module.exports = VolquetaImage;

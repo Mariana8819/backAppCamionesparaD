@@ -1,7 +1,5 @@
-"use strict";
-
-var mongoose = require('mongoose');
-var imageHeavyLoadSchema = new mongoose.Schema({
+const mongoose = require('mongoose');
+const imageHeavyLoadSchema = new mongoose.Schema({
   heavyload: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'CargaPesada',
@@ -17,5 +15,5 @@ var imageHeavyLoadSchema = new mongoose.Schema({
     required: true
   }
 });
-var HeavyLoadImage = mongoose.model('HeavyLoadImage', imageHeavyLoadSchema);
+const HeavyLoadImage = mongoose.model('HeavyLoadImage', imageHeavyLoadSchema);
 module.exports = HeavyLoadImage;

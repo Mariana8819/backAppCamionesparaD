@@ -1,27 +1,21 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports["default"] = void 0;
-var _cloudinarys = require("../controllers/cloudinarys.controller");
-var _express = require("express");
+import { uploadImage, parser, getImagesFromCloudinay, deleteImageById, getImageById, updateImageById } from '../controllers/cloudinarys.controller';
+import { Router } from 'express';
 // import { TokenValidation } from '../authentication/tokens/verifyToken'; // Activar para la producción...
 
-var router = (0, _express.Router)();
+const router = Router();
 router.post('/upload',
 // TokenValidation,
-_cloudinarys.parser, _cloudinarys.uploadImage);
+parser, uploadImage);
 router.get('/',
 //TokenValidation,
-_cloudinarys.getImagesFromCloudinay);
-router["delete"]('/delete/:id',
+getImagesFromCloudinay);
+router.delete('/delete/:id',
 // TokenValidation,
-_cloudinarys.deleteImageById);
+deleteImageById);
 router.get('/:id',
 // TokenValidation,
-_cloudinarys.getImageById);
+getImageById);
 router.put('/update/:id',
 // TokenValidation,
-_cloudinarys.updateImageById);
-var _default = exports["default"] = router;
+updateImageById);
+export default router;

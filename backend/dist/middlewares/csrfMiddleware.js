@@ -1,19 +1,12 @@
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.verifyCsrfToken = exports.handleCsrfError = exports.generateCsrfToken = exports["default"] = void 0;
-var _csrf = _interopRequireDefault(require("csrf"));
-var _express = _interopRequireDefault(require("express"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
-var csrfProtection = new _csrf["default"]();
-var router = (0, _express["default"])();
+import csrf from 'csrf';
+import Router from 'express';
+const csrfProtection = new csrf();
+const router = Router();
 
 // Middleware para generar y enviar el token CSRF...
-var generateCsrfToken = exports.generateCsrfToken = function generateCsrfToken(req, res, next) {
+export const generateCsrfToken = (req, res, next) => {
   if (!req.cookies['csrf-secret']) {
-    var secret = csrfProtection.secretSync();
+    const secret = csrfProtection.secretSync();
     res.cookie('csrf-secret', secret, {
       httpOnly: true,
       secure: true,
@@ -23,7 +16,7 @@ var generateCsrfToken = exports.generateCsrfToken = function generateCsrfToken(r
     // Se debe añadir esto, para que esté disponible en esta solicitud...
     req.cookies['csrf-secret'] = secret;
   }
-  var csrfToken = csrfProtection.create(req.cookies['csrf-secret'] || csrfProtection.secretSync());
+  const csrfToken = csrfProtection.create(req.cookies['csrf-secret'] || csrfProtection.secretSync());
   res.cookie('csrf-token', csrfToken, {
     // httpOnly: true,
     Secure: true,
@@ -35,10 +28,10 @@ var generateCsrfToken = exports.generateCsrfToken = function generateCsrfToken(r
 };
 
 // Middleware para verificar el token CSRF...
-var verifyCsrfToken = exports.verifyCsrfToken = function verifyCsrfToken(req, res, next) {
+export const verifyCsrfToken = (req, res, next) => {
   // Se obtiene el token de los headers...
-  var csrfToken = req.headers['csrf-token'];
-  var csrfSecret = req.cookies['csrf-secret'];
+  const csrfToken = req.headers['csrf-token'];
+  const csrfSecret = req.cookies['csrf-secret'];
   if (csrfProtection.verify(csrfSecret, csrfToken)) {
     next();
   } else {
@@ -49,12 +42,12 @@ var verifyCsrfToken = exports.verifyCsrfToken = function verifyCsrfToken(req, re
 };
 
 // Ruta para obtener el token CSRF...
-router.get('/api/csrf-token', function (req, res) {
+router.get('/api/csrf-token', (req, res) => {
   res.json({
     csrfToken: res.locals.csrfToken
   });
 });
-var handleCsrfError = exports.handleCsrfError = function handleCsrfError(err, req, res, next) {
+export const handleCsrfError = (err, req, res, next) => {
   if (err.code === 'EBADCSRFTOKEN') {
     // Manejo de error CSRF
     res.status(403).json({
@@ -64,4 +57,4 @@ var handleCsrfError = exports.handleCsrfError = function handleCsrfError(err, re
     next(err);
   }
 };
-var _default = exports["default"] = router;
+export default router;

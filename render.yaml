@@ -6,7 +6,6 @@ services:
       rootDirectory: backend
       buildCommand: npm install && npm run build
       startCommand: npm start
-      buildImage: "node:18"
       envVars:
           - key: NODE_ENV
             value: production

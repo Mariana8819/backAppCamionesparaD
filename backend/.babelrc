@@ -1,0 +1,16 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "node": "current" // Compatible con la versión de Node.js del entorno
+                },
+                "modules": false, // Asegura la compilación de ./dist en ESM 6 >
+                "useBuiltIns": "usage", // Agrega solo los polyfills necesarios
+                "corejs": 3 // Asegura que se utilice CoreJS versión 3
+            }
+        ]
+    ],
+    "plugins": []
+}

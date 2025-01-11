@@ -1,0 +1,76 @@
+//- Plantilla para dar formato al documento PDF...
+
+doctype html
+html
+  head
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+        gap: 10px;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .container div {
+        border: 1px solid #ddd;
+        padding: 10px;
+        font-size: 16px;
+      }
+      .container .title {
+        font-weight: bold;
+        background-color: #f2f2f2;
+      }
+      .container .value {
+        font-weight: normal;
+        color: #000;
+      }
+      .full-row {
+        grid-column: span 2; /* Hace que ocupe las dos columnas */
+      }
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 11px;
+        color: #555;
+      }
+  body
+    h1 Recibo de Tanqueo
+    .container
+      // Primera fila
+      .title Recibo Nº
+      .title Fecha de Tanqueo
+      .value #{n_recibo}
+      .value #{fecha_tanqueo}
+
+      // Segunda fila
+      .title Conductor
+      .title Vehículo Placas
+      .value #{conductor_cedula}
+      .value #{vehiculo_placa}
+
+      // Tercera fila
+      .title Estación de Servicio
+      .title Cantidad de galones
+      .value #{estacion}
+      .value #{cantidad_galones}
+
+      // Cuarta fila
+      //- .title.full-row Valor del Tanqueo
+      //- .value.full-row #{valor_tanqueo}
+      .title Kilometraje
+      .title Valor del Tanqueo
+      .value #{km_al_tanqueo}
+      .value #{valor_tanqueo}
+    .footer
+      p Este es un documento generado electrónicamente

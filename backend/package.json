@@ -7,7 +7,7 @@
     "scripts": {
         "format": "prettier --write .",
         "dev": "nodemon src/index.js --exec babel-node",
-        "build": "npm ci && babel src -d dist && node copy-files.js",
+        "build": "npm ci && npx babel src -d dist && node copy-files.js",
         "start": "node dist/index.js"
     },
     "author": "IP Proyectos y Soluciones",

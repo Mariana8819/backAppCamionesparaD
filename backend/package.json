@@ -10,9 +10,6 @@
         "build": "npm ci && babel src -d dist && node copy-files.js",
         "start": "node dist/index.js"
     },
-    "engines": {
-        "node": ">=18.x"
-    },
     "author": "IP Proyectos y Soluciones",
     "license": "ISC",
     "dependencies": {
